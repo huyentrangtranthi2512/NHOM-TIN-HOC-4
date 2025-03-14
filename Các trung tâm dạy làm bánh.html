@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Quán Dạy Làm Bánh Ngon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .no-data {
+            text-align: center;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Danh Sách Các Quán Dạy Làm Bánh Ngon</h1>
+
+    <div class="container">
+        <!-- Phần Hà Nội -->
+        <div class="section">
+            <div class="section-title">1. Hà Nội:</div>
+            <div id="quans-hanoi-list"></div> <!-- Bảng hoặc thông báo "Không có dữ liệu" cho Hà Nội -->
+        </div>
+
+<br> 
+        <!-- Phần TP. Hồ Chí Minh -->
+        <div class="section">
+            <div class="section-title"> 2. Thành phố Hồ Chí Minh: </div>
+            <div id="quans-hcm-list"></div> <!-- Bảng hoặc thông báo "Không có dữ liệu" cho TP. HCM -->
+        </div>
+</br>
+    </div>
+
+    <script>
+        // Dữ liệu các quán dạy làm bánh tại Hà Nội
+        const quansHanoi = [
+            { name: "Workshop Bakerland", address: "36A Nguyên Hồng, Quận Đống Đa", phone: "0976 257 665" },
+            { name: "Trung tâm EZcooking", address: "Tầng 5, 142 Lê Duẩn, Quận Đống Đa", phone: "0963 938 523" },
+            { name: "Trung tâm Quả Táo Vàng", address: "Quận Đống Đa, Hà Nội", phone: "0988 456 982" },
+            { name: "Trung tâm Bếp Vui Hà Thành", address: "Quận Đống Đa, Hà Nội", phone: "0974 637 879" },
+            { name: "Trung tâm Kitchen Art", address: "Quận Đống Đa, Hà Nội", phone: "0953 657 839" }
+        ];
+
+        // Dữ liệu các quán dạy làm bánh tại TP. Hồ Chí Minh
+        const quansHCM = [
+            { name: "Baker Kitchen (Cô Biện Kiều)", address: "83 Nguyễn Thái Sơn, Phường 4, Quận Gò Vấp", phone: "0909 984 254" },
+            { name: "Nokkaew Dessert Café", address: "4/2 Phan Kế Bính, Phường Đa Kao, Quận 1", phone: "0703 839 155" },
+            { name: "Lớp học làm bánh Chú Quân", address: "145/23 Lê Quang Định, Phường 14, Quận Bình Thạnh", phone: "0989 480 048" },
+            { name: "Nhà Văn Hóa Phụ Nữ", address: "188-192-194 Lý Chính Thắng, Phường 9, Quận 3", phone: "028 3931 6447" },
+            { name: "Trung tâm dạy nghề Âu Cannelle Gateau", address: "Quận 1, TP. HCM", phone: "0987 653 444" }
+        ];
+
+        // Hàm để tạo bảng nếu có dữ liệu
+        function renderQuanList(quans, containerId) {
+            const listContainer = document.getElementById(containerId);
+
+            if (quans.length > 0) {
+                let tableHTML = `<table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tên Quán</th>
+                                            <th>Địa Chỉ</th>
+                                            <th>Số Điện Thoại</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>`;
+                
+                // Duyệt qua danh sách quán và thêm vào bảng
+                quans.forEach(quan => {
+                    tableHTML += `<tr>
+                                    <td>${quan.name}</td>
+                                    <td>${quan.address}</td>
+                                    <td>${quan.phone}</td>
+                                  </tr>`;
+                });
+
+                tableHTML += `</tbody></table>`;
+                listContainer.innerHTML = tableHTML;
+            } else {
+                // Nếu không có dữ liệu, hiển thị thông báo
+                listContainer.innerHTML = '<p class="no-data">Không có dữ liệu.</p>';
+            }
+        }
+
+        // Gọi hàm để hiển thị danh sách quán tại Hà Nội và TP. HCM
+        renderQuanList(quansHanoi, "quans-hanoi-list");
+        renderQuanList(quansHCM, "quans-hcm-list");
+    </script>
+
+</body>
+</html>
